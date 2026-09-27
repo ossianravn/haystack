@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Virtual company table</title>
+<style>
+  body { margin: 24px; font: 16px system-ui; }
+  #companies { height: 420px; overflow: auto; border: 1px solid; }
+  table { width: 100%; }
+  tbody { display: block; position: relative; height: 8000px; }
+  tr { position: absolute; display: flex; width: 100%; height: 100px; }
+  td { padding: 16px; width: 30%; }
+</style>
+<h1>Companies</h1>
+<div id="companies"><table><tbody></tbody></table></div>
+<script>
+  const scroller = document.querySelector('#companies');
+  const body = document.querySelector('tbody');
+  function render() {
+    const start = Math.max(0, Math.floor(scroller.scrollTop / 100) - 10);
+    const end = Math.min(80, start + 22);
+    for (const row of body.children) row.dataset.keep = 'false';
+    for (let index = start; index < end; index++) {
+      let row = body.querySelector(`[data-index="${index}"]`);
+      if (!row) {
+        row = document.createElement('tr');
+        row.dataset.index = index;
+        row.style.transform = `translateY(${index * 100}px)`;
+        for (const value of [index + 1, `Company ${index + 1}`, 'Telecommunications']) {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.append(cell);
+        }
+        body.append(row);
+      }
+      row.dataset.keep = 'true';
+    }
+    for (const row of [...body.children]) if (row.dataset.keep === 'false') row.remove();
+  }
+  scroller.addEventListener('scroll', render);
+  render();
+</script>
+</html>

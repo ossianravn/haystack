@@ -1,0 +1,34 @@
+@import "tailwindcss";
+@import "./theme.css";
+@import "./panel.css";
+@import "./results.css";
+@import "./settings.css";
+
+* { box-sizing: border-box; }
+html { background: var(--background); color: var(--foreground); color-scheme: light; }
+body { margin: 0; font-family: var(--font-sans); font-size: 14px; -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; }
+button, a, input { -webkit-tap-highlight-color: transparent; }
+button:not(:disabled), input[type="range"] { cursor: pointer; }
+button:disabled { cursor: default; }
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+h1, h2, p { margin: 0; }
+svg { flex-shrink: 0; }
+::selection { background: var(--highlight); color: var(--foreground); }
+[data-slot="button"] { border-radius: 2px; min-height: 40px; transition-property: background-color, opacity; }
+[data-slot="button"][data-size="icon"] { width: 40px; padding: 0; }
+[data-slot="input"] { border-radius: 2px; min-height: 44px; background: var(--input-surface); box-shadow: none; }
+[data-slot="alert"] { margin: 0; border-radius: 0; border: 0; border-left: 3px solid var(--destructive); background: var(--error-surface); }
+[data-slot="field-description"] { line-height: 1.6; color: var(--muted-foreground); font-size: 13px; }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media (forced-colors: active) {
+  .result-row[data-active="true"] { border-left-color: Highlight; }
+  mark { background: Highlight; color: HighlightText; }
+}

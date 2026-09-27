@@ -1,0 +1,9 @@
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+artifacts/
+.test-profile*/
+test-results/
+.dev-docs/

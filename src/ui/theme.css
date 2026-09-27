@@ -1,0 +1,46 @@
+:root {
+  --paper: #faf7ef;
+  --ink: #342c20;
+  --hay: #d3b66f;
+  --hay-ink: #856323;
+  --pencil: #746b5b;
+  --rule: #e4dccb;
+  --highlight: #f0dda0;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --primary: var(--hay);
+  --primary-foreground: var(--ink);
+  --secondary: #f0e7d1;
+  --secondary-foreground: var(--ink);
+  --muted: #f6efde;
+  --muted-foreground: var(--pencil);
+  --border: var(--rule);
+  --input: #978667;
+  --input-surface: #f3edde;
+  --ring: #96702b;
+  --destructive: #a1422d;
+  --error-surface: #f7eae0;
+  --radius: 2px;
+  --font-sans: "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-reading: Georgia, "Times New Roman", serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --font-sans: var(--font-sans);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+}

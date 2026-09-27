@@ -1,0 +1,52 @@
+{
+  "name": "haystack-extension",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "node scripts/build.mjs",
+    "check": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:live": "node --env-file=.env --import tsx scripts/live-test.ts",
+    "test:browser": "node scripts/browser-test.mjs",
+    "test:navigation": "node scripts/navigation-test.mjs",
+    "test:local": "node scripts/local-browser-test.mjs",
+    "test:firefox": "node --env-file=.env scripts/firefox-test.mjs",
+    "test:pdf": "node scripts/pdf-browser-test.mjs",
+    "test:pdf:live": "node --env-file=.env scripts/pdf-browser-test.mjs --live",
+    "test:pdf:firefox": "node --env-file=.env scripts/pdf-firefox-test.mjs",
+    "lint:firefox": "web-ext lint --source-dir dist/firefox --warnings-as-errors"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.8.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.48.0",
+    "pdfjs-dist": "^6.3.289",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/chrome": "^0.3.0",
+    "@types/node": "^26.6.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/webextension-polyfill": "^0.12.6",
+    "@vitejs/plugin-react": "^6.1.1",
+    "esbuild": "^0.28.2",
+    "fflate": "^0.8.3",
+    "geckodriver": "^7.0.0",
+    "playwright": "^1.63.0",
+    "selenium-webdriver": "^4.49.0",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "web-ext": "^10.7.0"
+  }
+}
