@@ -12,7 +12,7 @@ export interface Platform {
   reset(): void;
   subscribePageChange(listener: () => void): () => void;
   subscribeSettingsChange(listener: () => void): () => void;
-  search(page: PageSnapshot, query: string, settings: Settings, signal: AbortSignal, progress: (count: number) => void): Promise<SearchResult>;
+  search(page: PageSnapshot, query: string, settings: Settings, signal: AbortSignal, progress: (count: number, message?: string) => void): Promise<SearchResult>;
   verifyKey(key: string, signal: AbortSignal): Promise<void>;
   saveMarkdown(markdown: string, filename: string): Promise<void>;
 }

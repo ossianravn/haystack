@@ -62,7 +62,7 @@ export function LocalSettings({ platform, model }: { platform: Platform; model: 
     <section className="privacy"><h2>Search on this device</h2>
       <p>The page or PDF’s text and your query are processed locally in Chrome. No API key or TypeSafe credits are needed.</p>
       <p>Chrome may download the model during setup. Local searches never switch to a cloud provider automatically.</p>
-      <p>Matches keep the original wording and source order. Danish and other languages beyond Chrome’s documented support are experimental.</p>
+      <p>Nano expands your query, then checks likely passages. Candidate selection can miss relevant passages. Matches keep the original wording and source order.</p>
       <a className="text-link" href="https://developer.chrome.com/docs/ai/get-started#hardware" target="_blank" rel="noreferrer">Chrome model requirements</a>
     </section>
   </>;

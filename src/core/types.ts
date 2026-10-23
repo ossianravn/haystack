@@ -10,6 +10,7 @@ export interface PageSnapshot {
   id: string;
   url: string;
   title: string;
+  language?: string;
   passages: Passage[];
   pdf?: { pageCount: number; emptyPages: number[] };
 }

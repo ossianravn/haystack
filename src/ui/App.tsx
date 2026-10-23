@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowRight, FileText, LoaderCircle, Search, Settings2, Square } from 'lucide-react';
+import { ArrowRight, FileText, LoaderCircle, Search, Settings2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Field, FieldLabel } from '@/components/ui/field';
@@ -49,8 +49,9 @@ export function App({ platform }: { platform: Platform }) {
             <div className="search-line"><Search size={19} aria-hidden="true" />
               <Input id="query" value={search.query} onChange={(event) => search.setQuery(event.target.value)}
                 autoFocus placeholder="What are you looking for?" autoComplete="off" disabled={search.busy} />
-              {search.busy ? <Button type="button" variant="ghost" size="icon" aria-label="Cancel search" onClick={search.cancel}><Square /></Button>
-                : <Button type="submit" size="icon" aria-label="Find matching passages" disabled={!search.query.trim() || connected !== true}><ArrowRight /></Button>}
+              {/* Keep Cancel's click target from becoming a submit button before native activation finishes. */}
+              {search.busy ? <Button key="cancel" type="button" variant="ghost" aria-label="Cancel search" onClick={search.cancel}>Cancel</Button>
+                : <Button key="search" type="submit" size="icon" aria-label="Find matching passages" disabled={!search.query.trim() || connected !== true}><ArrowRight /></Button>}
             </div>
           </Field>
         </form>
@@ -65,7 +66,7 @@ export function App({ platform }: { platform: Platform }) {
         <span>{new URL(search.page.url).hostname || 'Local file'} · {search.page.pdf ? `${search.page.pdf.pageCount} PDF pages · ` : ''}{search.page.passages.length} passages</span></div></div>}
       {!!search.page?.pdf?.emptyPages.length && <p className="notice" role="status">{search.page.pdf.emptyPages.length} PDF {search.page.pdf.emptyPages.length === 1 ? 'page has' : 'pages have'} no extractable text. Images and scans aren’t searched.</p>}
       {search.busy && <div className="search-progress" role="status"><LoaderCircle className="spin" size={18} />
-        <span>{search.page ? `Searching ${search.progress} of ${search.page.passages.length} passages…` : search.captureProgress}</span></div>}
+        <span>{search.page ? search.searchProgress || `Searching ${search.progress} of ${search.page.passages.length} passages…` : search.captureProgress}</span></div>}
       {search.result && <Results key={search.result.page.id} result={search.result} active={search.active}
         select={search.select} clear={search.clear} platform={platform} />}
       {!search.busy && !search.result && !search.accessRequest && <Empty className="welcome-state"><EmptyHeader>
@@ -76,7 +77,7 @@ export function App({ platform }: { platform: Platform }) {
       {connected === true && <div className="example-searches"><span>Try a question</span>
         {['What are the extra costs?', 'What happens if I cancel?'].map((query) => <Button key={query} variant="ghost" onClick={() => { search.setQuery(query); document.getElementById('query')?.focus(); }}>{query}<ArrowRight data-icon="inline-end" /></Button>)}
       </div>}</Empty>}
-      {!search.result?.matches.length && <footer className="app-footer"><span className="connection-dot" data-connected={connected} />{provider === 'chrome-local' ? connected ? 'Local model ready' : 'Local setup needed' : connected ? 'TypeSafe connected' : 'Your key. Your searches.'}<span>{provider === 'chrome-local' ? 'Gemini Nano' : 'Jev'}</span></footer>}
+      {!search.result?.matches.length && <footer className="app-footer"><span className="connection-dot" data-connected={connected} />{provider === 'chrome-local' ? connected ? 'Local model available' : 'Local setup needed' : connected ? 'TypeSafe connected' : 'Your key. Your searches.'}<span>{provider === 'chrome-local' ? 'Gemini Nano' : 'Jev'}</span></footer>}
     </>}
   </div>;
 }

@@ -2,7 +2,7 @@
 
 Investigated 2026-09-27. This document records the proposal before implementation; it is not a live-model benchmark.
 
-Follow-up: the opt-in Chrome provider was implemented in version 1.2.0 after this investigation. See the README's Chrome local search section for current behavior and validation. The proposal below is retained as the design rationale. Native Nano inference remains unverified: the isolated Chrome 153 test profile exposed the API but reported it unavailable.
+Follow-up: the opt-in Chrome provider was implemented in version 1.2.0 after this investigation. Live evaluation subsequently exposed poor precision and latency in the exhaustive classification approach. With user approval, it was replaced by query expansion, local candidate retrieval and source-quotation verification. See the [native evaluation report](nano-retrieval-evaluation.md) and the [guide](guide.md#chrome-local-search-experimental) for current behavior. The proposal below records the original reasoning and is superseded where it describes exhaustive local classification.
 
 ## Finding
 

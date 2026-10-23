@@ -12,14 +12,14 @@ export function installLocalModelDouble() {
       measureContextUsage: async (text, options) => text.length + JSON.stringify(options ?? {}).length,
       clone: async ({ signal }) => session(signal),
       destroy,
-      prompt: async (input, { signal }) => {
+      prompt: async (input, { signal, responseConstraint }) => {
         signal.throwIfAborted();
-        if (!input.startsWith('{')) { state.setupCalls++; return '{"p0":0}'; }
-        state.calls.push(JSON.parse(input));
+        if (input.startsWith('Query:')) { state.setupCalls++; return '{"p0":0}'; }
+        state.calls.push(input);
         if (state.hold) await new Promise((_, reject) => signal.addEventListener('abort', () => reject(signal.reason), { once: true }));
-        return JSON.stringify(Object.fromEntries(JSON.parse(input).passages.map((p) => [p.id,
-          p.sentences.find((s) => /cancel|refund/i.test(s.text))?.index ?? -1,
-        ])));
+        if (input.startsWith('Rewrite')) return '{"keywords":"cancel cancellation refund"}';
+        const allowed = responseConstraint.properties.quote.enum;
+        return JSON.stringify({ quote: allowed.find((quote) => quote && /cancel|refund/i.test(quote)) ?? null });
       },
     };
   }

@@ -59,7 +59,9 @@ export async function readPDF(url: string, title: string, signal: AbortSignal,
       signal.throwIfAborted();
       progress(`Reading PDF page ${number} of ${pdf.numPages}…`);
       const page = await pdf.getPage(number);
-      const blocks = pdfParagraphs(await page.getTextContent());
+      const content = await page.getTextContent();
+      snapshot.language ||= content.lang ?? undefined;
+      const blocks = pdfParagraphs(content);
       if (!blocks.length) snapshot.pdf!.emptyPages.push(number);
       for (const block of blocks) for (const span of passages(block)) {
         snapshot.passages.push({ id: `p${snapshot.passages.length}`, text: span.text,

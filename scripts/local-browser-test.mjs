@@ -94,7 +94,7 @@ try {
       await panel.evaluate(() => document.querySelector('[aria-label="Find matching passages"]').click());
       await panel.getByRole('button', { name: 'Cancel search', exact: true }).waitFor();
       await panel.waitForFunction(() => window.localModelTest.active >= 2);
-      await panel.evaluate(() => document.querySelector('[aria-label="Cancel search"]').click());
+      await panel.getByRole('button', { name: 'Cancel search', exact: true }).click();
       await panel.getByText('Search cancelled.').waitFor();
       await panel.waitForFunction(() => window.localModelTest.active === 0);
       assert.equal(await panel.locator('.result-row').count(), 0);

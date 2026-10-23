@@ -1,0 +1,12 @@
+{
+  "id": "native-english",
+  "title": "Train tickets",
+  "language": "en",
+  "url": "https://example.com/train-tickets",
+  "passages": [
+    { "id": "refund", "heading": "Cancellations", "text": "A refund is available if your train is cancelled." },
+    { "id": "breakfast", "heading": "Onboard", "text": "Breakfast is served in the dining car." },
+    { "id": "account", "heading": "Your account", "text": "You can reset your password in the app." },
+    { "id": "exception", "heading": "Advance tickets", "text": "Advance tickets cannot normally be refunded. This restriction does not apply when the operator cancels your train." }
+  ]
+}

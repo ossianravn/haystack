@@ -26,7 +26,7 @@ export function rangeFor(nodes: Text[], start: number, end: number) {
 }
 
 export function capturePage() {
-  const page: PageSnapshot = { id: crypto.randomUUID(), title: document.title, url: location.href, passages: [] };
+  const page: PageSnapshot = { id: crypto.randomUUID(), title: document.title, language: document.documentElement.lang, url: location.href, passages: [] };
   const ranges = new Map<string, CapturedRange>();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
   const visible = new WeakMap<Element, boolean>();

@@ -8,6 +8,7 @@ export function useSearch(platform: Platform) {
   const [page, setPage] = useState<PageSnapshot | null>(null);
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [searchProgress, setSearchProgress] = useState('');
   const [captureProgress, setCaptureProgress] = useState('Reading the page…');
   const [active, setActive] = useState(0);
   const [error, setError] = useState('');
@@ -39,6 +40,7 @@ export function useSearch(platform: Platform) {
     controller.current = current;
     setBusy(true);
     setProgress(0);
+    setSearchProgress('');
     setCaptureProgress('Reading the page…');
     setActive(0);
     try {
@@ -50,7 +52,9 @@ export function useSearch(platform: Platform) {
       current.signal.throwIfAborted();
       setPage(captured);
       const found = await platform.search(captured, query.trim(), settings, current.signal,
-        (count) => { if (!current.signal.aborted) setProgress(count); });
+        (count, message) => {
+          if (!current.signal.aborted) { setProgress(count); setSearchProgress(message ?? ''); }
+        });
       current.signal.throwIfAborted();
       setResult(found);
       await platform.highlight(found, 0, false);
@@ -100,6 +104,6 @@ export function useSearch(platform: Platform) {
     setQuery(value);
     if (result) reset();
   };
-  return { query, setQuery: editQuery, result, page, busy, progress, captureProgress, active, error, notice, accessRequest, allowPDFAccess, search, select,
+  return { query, setQuery: editQuery, result, page, busy, progress, searchProgress, captureProgress, active, error, notice, accessRequest, allowPDFAccess, search, select,
     cancel: () => reset('Search cancelled.'), clear: () => reset() };
 }
