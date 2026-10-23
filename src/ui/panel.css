@@ -14,7 +14,7 @@
   border-bottom: 1px solid var(--border);
 }
 .brand { display: inline-flex; gap: 9px; align-items: center; font-size: 24px; font-weight: 650; letter-spacing: -1.1px; }
-.brand > svg { width: 28px; height: 28px; color: var(--hay-ink); }
+.brand > img { width: auto; height: 30px; }
 .brand-period { color: var(--hay-ink); }
 .search-section { padding: 28px 24px 20px; }
 .search-section h1 {
